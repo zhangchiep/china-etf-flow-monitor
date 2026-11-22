@@ -7,8 +7,8 @@
 ## 第一次使用
 
 1. **下载并完整解压。** 将 ZIP 解压到自己有写入权限的文件夹，例如「文档」。也可以用 GitHub 仓库的 **Code → Download ZIP** 下载源码。
-2. **双击 `打开资金图表.cmd`。** 启动器会检查运行环境并打开本机网页。Windows x64 电脑没有可用 Python 时，会自动下载约 31 MB 的官方 Python 运行环境，再安装计算依赖。首次准备需要联网。
-3. **在网页输入自己的 Tushare Pro Token，点击「开始计算六张图」。** 可在 Tushare 的「个人中心 → 账号与 TOKEN」复制。全程无需编辑 Python 文件、设置环境变量或登录聚宽。[Tushare 获取 Token 说明](https://tushare.pro/document/1?doc_id=39)
+2. **打开解压后的文件夹，双击 `打开资金图表.cmd`。** 如果 Windows 隐藏了扩展名，双击名称为「打开资金图表」的文件即可。等待启动器准备好环境，浏览器会自动打开同一文件夹里的 **`打开图表.html`**。Windows x64 电脑没有可用 Python 时，会自动下载约 31 MB 的官方 Python 运行环境，再安装计算依赖。首次准备需要联网。
+3. **在 `打开图表.html` 页面填写 Token。** 登录 Tushare，在「个人中心 → 账号与 TOKEN」复制自己的 Token。回到刚打开的看板，在「连接 Tushare」区域找到 **Tushare Pro Token** 输入框，粘贴后点击 **「开始计算六张图」**。[Tushare 获取 Token 说明](https://tushare.pro/document/1?doc_id=39)
 4. **等页面显示六张图。** 第一次会下载多年历史，耗时随网络和账号限频而变。命令窗口在环境准备完成后自动关闭，网页会继续显示计算进度。
 
 ![首次使用时，在网页的 Tushare Pro Token 输入框粘贴自己的凭据，然后点击开始计算六张图](docs/start.png)
