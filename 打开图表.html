@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="referrer" content="no-referrer">
+  <title>国家队资金捕捉 · 开源版</title>
+  <link rel="stylesheet" href="程序/style.css">
+  <link rel="stylesheet" href="程序/public-entry.css">
+  <script defer src="程序/public-entry.js"></script>
+  <script defer src="程序/live.js"></script>
+</head>
+<body class="awaiting-history">
+  <main class="workspace">
+    <header class="masthead">
+      <div class="title-lockup">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <div><h1>国家队资金捕捉</h1><p>开源版 · 宽基 ETF 申赎与市场指标</p></div>
+      </div>
+      <div class="dataset-date"><span>本地交易日历</span><strong id="available-range">正在载入…</strong></div>
+    </header>
+    <section class="access-card" aria-labelledby="access-title">
+      <div class="access-head"><h2 id="access-title">连接 Tushare</h2><span id="access-mode"></span></div>
+      <form id="token-form" autocomplete="off" hidden>
+        <label for="tushare-token">Tushare Pro Token</label>
+        <div class="token-row">
+          <input id="tushare-token" type="password" placeholder="粘贴自己的 Token" aria-describedby="access-help" autocomplete="off" autocapitalize="off" spellcheck="false" required>
+          <button id="start-calculation" class="primary-action" type="submit">开始计算六张图</button>
+        </div>
+        <p id="access-help">Token 仅用于本次运行。可在 Tushare 个人中心的「账号与 TOKEN」中复制。<a href="https://tushare.pro/document/1?doc_id=39" target="_blank" rel="noopener noreferrer">查看获取方法</a></p>
+      </form>
+      <div class="access-status">
+        <p id="refresh-status" role="status" aria-live="polite">正在检查本地入口…</p>
+        <button type="button" id="cancel-pending" hidden>取消等待</button>
+      </div>
+    </section>
+    <section class="controls" aria-labelledby="date-heading">
+      <div class="control-head"><h2 id="date-heading">统一观察区间</h2><span>各图默认跟随此区间。图③至⑥可在图内单独选日期。 <a class="jump-link" href="#chart3">查看图③ ↓</a></span></div>
+      <div class="controls-grid">
+        <div class="date-field"><label for="start-date">开始日期</label>
+          <div class="input-wrap"><input id="start-date" type="text" inputmode="numeric" placeholder="YYYY-MM-DD" maxlength="10" autocomplete="off" spellcheck="false"><button type="button" class="calendar-button" id="start-calendar" aria-label="选择开始日期" aria-haspopup="dialog" aria-expanded="false"><span class="calendar-icon" aria-hidden="true"></span></button></div>
+        </div>
+        <div class="date-field"><label for="end-date">结束日期</label>
+          <div class="input-wrap"><input id="end-date" type="text" inputmode="numeric" placeholder="YYYY-MM-DD" maxlength="10" autocomplete="off" spellcheck="false"><button type="button" class="calendar-button" id="end-calendar" aria-label="选择结束日期" aria-haspopup="dialog" aria-expanded="false"><span class="calendar-icon" aria-hidden="true"></span></button></div>
+        </div>
+        <div class="mode-field"><label for="position-mode">图①分位与高点</label><select id="position-mode"><option value="250">回看250个交易日</option><option value="range">使用所选区间</option></select></div>
+      </div>
+      <div class="presets"><span class="field-caption">快捷区间</span><div class="preset-group"><button id="preset-25" type="button">近25个交易日</button><button id="preset-250" type="button">近250个交易日</button><button id="preset-1y" type="button">近1年</button><button id="preset-3y" type="button">近3年</button><button id="preset-all" type="button">全部申赎历史</button></div></div>
+      <div id="calendar-popover" role="dialog" aria-label="选择日期" hidden>
+        <div class="picker-top"><button id="calendar-prev" type="button" aria-label="上个月">‹</button><div class="pick-selects"><select id="calendar-year" aria-label="年"></select><select id="calendar-month" aria-label="月"></select></div><button id="calendar-next" type="button" aria-label="下个月">›</button></div>
+        <div class="weekday-row" aria-hidden="true"><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span></div><div class="day-grid"></div>
+      </div>
+    </section>
+    <div class="status-strip"><div id="app-status" data-state="loading" role="status" aria-live="polite">正在读取本地研究数据…</div><span id="session-info"></span></div>
+    <div id="chart-deck" class="chart-deck" aria-label="六项市场指标"></div>
+    <template id="flow-controls-template">
+      <div class="flow-controls">
+        <label for="flow-base">累计起点<select id="flow-base"><option value="selection">所选开始日</option><option value="history">可用申赎历史起点</option></select></label>
+        <label for="flow-scope">金额口径<select id="flow-scope"><option value="observed">已覆盖金额</option><option value="strict">仅完整口径</option></select></label>
+      </div>
+      <div class="flow-summary" aria-live="polite"><p id="flow-conclusion"></p><p id="flow-quality"></p></div>
+    </template>
+    <template id="yield-controls-template">
+      <div class="yield-latest" aria-live="polite" aria-label="当前数据来源最新观测">
+        <p><span>最新股息率</span><strong data-yield-value="dividend"></strong><time data-yield-date="dividend"></time></p>
+        <p><span>最新国债收益率</span><strong data-yield-value="bond"></strong><time data-yield-date="bond"></time></p>
+        <p><span>最新同日利差</span><strong data-yield-value="spread"></strong><time data-yield-date="spread"></time></p>
+      </div>
+    </template>
+    <noscript>请在浏览器中启用 JavaScript，以计算所选区间的指标。</noscript>
+    <footer><strong>指标口径</strong><p>ETF 净申赎由份额变化与未复权收盘价估算，用于观察资金活动。单凭申赎数据无法识别买方身份。</p></footer>
+  </main>
+</body>
+</html>

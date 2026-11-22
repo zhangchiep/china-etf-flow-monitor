@@ -1,0 +1,10 @@
+数据/
+图表/
+.venv/
+.runtime/
+.runtime-stage-*/
+.env
+程序/本机服务.js
+__pycache__/
+*.pyc
+*.lock

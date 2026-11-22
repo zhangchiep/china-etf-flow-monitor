@@ -1,0 +1,31 @@
+.awaiting-history .controls, .awaiting-history .status-strip, .awaiting-history .chart-deck,
+.awaiting-history .dataset-date, .awaiting-history footer {display: none}
+.access-card {
+  margin-bottom: 18px; padding: 20px 22px; border: 1px solid var(--line);
+  border-top: 3px solid #326957; background: white; border-radius: 9px; box-shadow: var(--shadow);
+}
+.access-head {display: flex; align-items: baseline; justify-content: space-between; gap: 8px 18px; flex-wrap: wrap}
+.access-head h2 {font-size: 18px; font-weight: 650}
+#access-mode {font-size: 13px; color: var(--muted)}
+#token-form {margin-top: 16px}
+#token-form label {display: block; margin-bottom: 6px; color: var(--ink); font-size: 13px; font-weight: 600}
+.token-row {display: flex; align-items: stretch; gap: 8px; max-width: 600px}
+#tushare-token {
+  flex: 1; min-width: 0; height: 43px; padding: 0 12px; border: 1px solid #aebeb6;
+  border-radius: 5px; color: var(--ink); background: #fff; font: inherit;
+}
+.primary-action {padding: 0 20px; border-color: #225d49; background: #265e4b; color: white; font-weight: 600}
+.primary-action:hover, .primary-action:focus-visible {background: #194b3b; color: white}
+.primary-action:disabled {opacity: .55; cursor: wait}
+#access-help {margin-top: 8px; line-height: 1.6; font-size: 12px; color: var(--muted)}
+#access-help a {color: var(--accent); text-underline-offset: 2px}
+.access-status {display: flex; align-items: baseline; flex-wrap: wrap; gap: 5px 12px}
+.access-card #refresh-status {padding: 0; margin: 10px 0 0; font-size: 13px; line-height: 1.65; color: #355b4c}
+.access-card #refresh-status[data-error="true"] {color: #973e2e}
+#cancel-pending {padding: 4px 9px; font-size: 12px}
+@media (max-width: 560px) {
+  .access-card {padding: 16px}
+  .token-row {flex-direction: column}
+  #tushare-token {flex: none; font-size: 16px}
+  .primary-action {min-height: 42px}
+}
